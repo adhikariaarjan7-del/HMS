@@ -1,0 +1,55 @@
+import { DataTypes } from "sequlize";
+import sequlize from "../db/connection";
+import { TableHints } from "sequelize";
+
+const User = sequelize.define(
+  "User",
+  {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
+ 
+    // patients → their email | staff → system-generated staffId
+    identifier: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      unique: true,
+    },
+ 
+    password_hash: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+ 
+    role: {
+      type: DataTypes.ENUM(
+        "patient",
+        "doctor",
+        "pharmacist",
+        "lab_assistant",
+        "admin"
+      ),
+      allowNull: false,
+    },
+ 
+    // bumped on every logout — any refresh token with an older
+    // version is immediately rejected
+    refresh_token_version: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+ 
+    is_active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+  },
+  {
+    tableName: "users",
+    timestamps: true,
+  }
+);
+
+export default User;
