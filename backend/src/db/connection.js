@@ -1,7 +1,7 @@
 // Using Sequence for connection
 
 import { Sequelize } from "sequelize";
-require("dotenv").config();
+import "dotenv/config";
 
 const sequelize = new Sequelize(
   process.env.DB_NAME, // database name
@@ -10,9 +10,9 @@ const sequelize = new Sequelize(
 
   {
     host: process.env.DB_HOST || "localhost",
-    port: process.env.DB_PORT || 8000,
+    port: Number(process.env.DB_PORT) || 3306,
     dialect: "mysql",
-    logging: false,
+    logging: process.env.NODE_ENV === "development" ? console.log : false,
 
     pool: {
       max: 10,

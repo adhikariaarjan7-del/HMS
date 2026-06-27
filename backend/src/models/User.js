@@ -1,5 +1,5 @@
-import { DataTypes } from "sequlize";
-import sequlize from "../db/connection";
+import { DataTypes } from "sequelize";
+import sequelize from "../db/connection.js";
 import { TableHints } from "sequelize";
 
 const User = sequelize.define(
@@ -34,8 +34,7 @@ const User = sequelize.define(
       allowNull: false,
     },
  
-    // bumped on every logout — any refresh token with an older
-    // version is immediately rejected
+   
     refresh_token_version: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
