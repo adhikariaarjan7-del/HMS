@@ -1,12 +1,8 @@
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import api from "../api/axios";
-
-axios.defaults.withCredentials = true;
-
 
 const HospitalIcon = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -21,15 +17,18 @@ const ShieldIcon = () => (
   </svg>
 );
 
+// FIX: staff log in with admin-generated IDs (e.g. DOC-2026-0001), not email.
+// The input must accept that, so type="email" can no longer be used and the
+// placeholder/label must reflect each role's actual identifier format.
 const ROLE_CONFIG = {
-  patient: { label: "Patient", placeholder: "patient@hospital.com" },
-  doctor: { label: "Doctor", placeholder: "doctor@hospital.com" },
-  admin: { label: "Admin", placeholder: "admin@hospital.com" },
+  patient: { label: "Patient", placeholder: "you@example.com", fieldLabel: "Email" },
+  doctor: { label: "Doctor", placeholder: "DOC-2026-0001", fieldLabel: "Staff ID" },
+  admin: { label: "Admin", placeholder: "ADM-2026-0001", fieldLabel: "Staff ID" },
 };
 
 const Login = () => {
   const [role, setRole] = useState("patient");
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -62,7 +61,8 @@ const Login = () => {
     setError("");
     setLoading(true);
     try {
-      const res = await api.post("/login", { email, password, role });
+    
+      const res = await api.post("/login", { identifier, password, role });
       if (res.data.success) {
         localStorage.setItem("hms_token", res.data.accessToken);
         login(res.data.user);
@@ -183,17 +183,17 @@ const Login = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4" noValidate>
           <div>
-            <label htmlFor="email" className={labelClass}>
-              {cfg.label} Email
+            <label htmlFor="identifier" className={labelClass}>
+              {cfg.label} {cfg.fieldLabel}
             </label>
             <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="identifier"
+              type="text"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
               placeholder={cfg.placeholder}
               required
-              autoComplete="email"
+              autoComplete="username"
               className={inputClass}
             />
           </div>

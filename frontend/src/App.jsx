@@ -12,18 +12,17 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        //write protectedRoute with all the resp. roles at the end not writing now due to dev proces
-        //PR for Admin
+        <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
           <Route path="/admin-dashboard/*" element={<AdminDashboard />} />
-        
+        </Route>
 
-       //PR for Doctor
+        <Route element={<ProtectedRoute allowedRoles={['doctor']} />}>
           <Route path="/doctor-dashboard/*" element={<DoctorDashboard />} />
-      
+        </Route>
 
-        //PR for Patient
+        <Route element={<ProtectedRoute allowedRoles={['patient']} />}>
           <Route path="/patient-dashboard/*" element={<PatientDashboard />} />
-        
+        </Route>
 
         <Route path="*" element={<Login />} />
       </Routes>

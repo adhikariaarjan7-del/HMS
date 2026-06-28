@@ -21,9 +21,9 @@ api.interceptors.response.use(
       original._retry = true;
       try {
         const { data } = await axios.post(
-          "http://localhost:8000/api/v1/hms/refresh",
+          `${import.meta.env.VITE_API_URL || "http://localhost:8000/api/v1/hms"}/refresh`,
           {},
-          { withCredentials: true }
+          { withCredentials: true },
         );
         localStorage.setItem("hms_token", data.accessToken);
         original.headers.Authorization = `Bearer ${data.accessToken}`;
@@ -35,7 +35,7 @@ api.interceptors.response.use(
       }
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default api;
