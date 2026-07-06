@@ -17,12 +17,11 @@ const ShieldIcon = () => (
   </svg>
 );
 
-// FIX: staff log in with admin-generated IDs (e.g. DOC-2026-0001), not email.
-// The input must accept that, so type="email" can no longer be used and the
-// placeholder/label must reflect each role's actual identifier format.
 const ROLE_CONFIG = {
   patient: { label: "Patient", placeholder: "you@example.com", fieldLabel: "Email" },
   doctor: { label: "Doctor", placeholder: "DOC-2026-0001", fieldLabel: "Staff ID" },
+  pharmacist: { label: "Pharmacist", placeholder: "PHM-2026-0001", fieldLabel: "Staff ID" },
+  lab_assistant: { label: "Lab Staff", placeholder: "LAB-2026-0001", fieldLabel: "Staff ID" },
   admin: { label: "Admin", placeholder: "ADM-2026-0001", fieldLabel: "Staff ID" },
 };
 
