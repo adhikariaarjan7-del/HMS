@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import DashboardLayout from "../components/DashboardLayout";
-import MetricCard from "../components/MetricCard";
-import DataTable from "../components/DataTable";
+import DashboardLayout from "../../components/DashboardLayout";
+import MetricCard from "../../components/MetricCard";
+import DataTable from "../../components/DataTable";
 
 const NAV_ITEMS = [
   { to: "/pharmacist-dashboard", label: "Overview" },

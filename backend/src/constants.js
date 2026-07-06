@@ -1,3 +1,11 @@
+export const APPOINTMENT_STATUS = {
+  PENDING: "pending",
+  CONFIRMED: "confirmed",
+  CANCELLED: "cancelled",
+  COMPLETED: "completed",
+};
+export const APPOINTMENT_STATUS_LIST = Object.values(APPOINTMENT_STATUS);
+
 export const ROLES = {
   PATIENT: "patient",
   DOCTOR: "doctor",

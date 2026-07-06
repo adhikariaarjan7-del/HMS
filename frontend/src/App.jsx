@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import AdminDashboard from './pages/AdminDashboard';
-import DoctorDashboard from './pages/DoctorDashboard';
-import PatientDashboard from './pages/PatientDashboard';
-import PharmacistDashboard from './pages/PharmacistDashboard';
-import LabAssistantDashboard from './pages/LabAssistantDashboard';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+import DoctorDashboard from './pages/Doctor/DoctorDashboard';
+import PatientDashboard from './pages/Patient/PatientDashboard';
+import PharmacistDashboard from './pages/Pharmacist/PharmacistDashboard';
+import LabAssistantDashboard from './pages/Lab/LabAssistantDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {

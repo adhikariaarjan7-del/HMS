@@ -5,6 +5,9 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import staffRoutes from "./routes/staff.js";
+import appointmentRoutes from "./routes/appointments.js";
+import doctorRoutes from "./routes/doctors.js";
+import prescriptionRoutes from "./routes/prescriptions.js";
 
 const app = express();
 
@@ -22,7 +25,9 @@ app.use(cookieParser());
 // Routes
 app.use("/api/v1/hms", authRoutes);
 app.use("/api/v1/hms/users", userRoutes);
-app.use("/api/v1/hms/staff", staffRoutes);
+app.use("/api/v1/hms/staff", staffRoutes);app.use("/api/v1/hms/appointments", appointmentRoutes);
+app.use("/api/v1/hms/doctors", doctorRoutes);
+app.use("/api/v1/hms/prescriptions", prescriptionRoutes);
 
 app.get("/health", (_, res) => res.json({ status: "ok" }));
 

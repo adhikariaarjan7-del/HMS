@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import DashboardLayout from "../components/DashboardLayout";
-import MetricCard from "../components/MetricCard";
-import AddStaffForm from "../components/AddStaffForm";
-import api from "../api/axios";
+import DashboardLayout from "../../components/DashboardLayout";
+import MetricCard from "../../components/MetricCard";
+import AddStaffForm from "../../components/AddStaffForm";
+import api from "../../api/axios";
 
 const NAV_ITEMS = [
   { to: "/admin-dashboard", icon: "", label: "Overview" },
@@ -47,7 +47,7 @@ const Placeholder = ({ label }) => (
 
 // --- Sub-component: UserRow ---
 const UserRow = ({ user, onToggle, onDelete }) => (
-  <tr className="border-b border-[#1a1a1a] last:border-none hover:bg-white/[0.02] transition-colors duration-100">
+  <tr className="border-b border-[#1a1a1a] last:border-none hover:bg-white/2 transition-colors duration-100">
     <td className="px-5 py-3.5 text-sm align-middle">
       <span className="font-mono text-xs text-[#666]">{user.identifier}</span>
     </td>
@@ -116,7 +116,7 @@ const UserManagementConsole = ({ users, onToggle, onDelete, activeFilter, onFilt
               {["Identifier", "Name", "Role", "Department", "Status", "Actions"].map((h) => (
                 <th
                   key={h}
-                  className="text-left text-[11px] font-bold uppercase tracking-widest text-[#666] px-5 py-3.5 bg-white/[0.02] border-b border-[#1a1a1a]"
+                  className="text-left text-[11px] font-bold uppercase tracking-widest text-[#666] px-5 py-3.5 bg-white/2 border-b border-[#1a1a1a]"
                 >
                   {h}
                 </th>
@@ -240,6 +240,7 @@ const UserManagementPage = () => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchUsers();
   }, []);
 
